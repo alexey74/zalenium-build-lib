@@ -137,7 +137,7 @@ ArrayList<String> runWorkerNodes(GString workerNodeImage, String networkParamete
 }
 
 String generateJobName() {
-    return JOB_BASE_NAME.replaceAll(/%/, '_') + "-${BUILD_NUMBER}"
+    return JOB_BASE_NAME.replaceAll(/[%/]/, '_') + "-${BUILD_NUMBER}"
 }
 
 private void stopSeleniumSession(ArrayList<String> firefoxContainerIDs, ArrayList<String> chromeContainerIDs) {
