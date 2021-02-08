@@ -68,7 +68,7 @@ void call(Map config = [:], String seleniumNetwork, Closure closure) {
 
         try {
             def seleniumHubHost = "${seleniumIp}:${config.hubPortMapping}"
-            waitForSeleniumToGetReady(seleniumHubHost, hubContainer)
+            waitForSeleniumToGetReady(seleniumHubHost, hubContainer, chromeContainers, firefoxContainers)
 
             closure.call(hubContainer, seleniumIp, uid, gid)
         } finally {
@@ -95,11 +95,17 @@ String findGid() {
             .trim()
 }
 
-void waitForSeleniumToGetReady(String host, hubContainer) {
+void waitForSeleniumToGetReady(String host, hubContainer, chromeContainers, firefoxContainers) {
     timeout(time: 10, unit: 'MINUTES') {
         echo "Waiting for selenium to become ready at http://${host}"
         while (!isSeleniumReady(host)) {
             sh "docker logs ${hubContainer.id}"
+            for (containerId in chromeContainers) {
+                sh "docker logs ${containerId}"
+            }
+            for (containerId in firefoxContainers) {
+                sh "docker logs ${containerId}"
+            }            
             sleep(time: 3, unit: 'SECONDS')
         }
         echo "Selenium ready at http://${host}"
