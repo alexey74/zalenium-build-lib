@@ -110,7 +110,7 @@ boolean isSeleniumReady(String host) {
     def result = sh(returnStdout: true,
             script: "curl -sSL http://${host}/wd/hub/status") // Don't fail
     echo "$result"
-    reutrn result.contains('ready\": true')
+    return result.contains('ready\": true')
 }
 
 class ConfigurationException extends RuntimeException {
