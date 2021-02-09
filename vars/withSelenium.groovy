@@ -133,10 +133,10 @@ ArrayList<String> runWorkerNodes(GString workerNodeImage, String networkParamete
 
     def workerImage = docker.image(workerNodeImage)
     workerImage.pull()
-    def dockerDefaultArgs = """${networkParameter} ${debugParameter} -e HUB_HOST=${hubHost}       
-      -e SE_EVENT_BUS_HOST=${hubHost}
-      -e SE_EVENT_BUS_PUBLISH_PORT=4442
-      -e SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    def dockerDefaultArgs = """${networkParameter} ${debugParameter} -e HUB_HOST=${hubHost} \
+      -e SE_EVENT_BUS_HOST=${hubHost} \
+      -e SE_EVENT_BUS_PUBLISH_PORT=4442 \
+      -e SE_EVENT_BUS_SUBSCRIBE_PORT=4443 \
       -v /dev/shm:/dev/shm
     """
     ArrayList<String> workerIDList = []
