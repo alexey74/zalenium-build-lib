@@ -137,7 +137,7 @@ ArrayList<String> runWorkerNodes(GString workerNodeImage, String networkParamete
       -e SE_EVENT_BUS_HOST=${hubHost} \
       -e SE_EVENT_BUS_PUBLISH_PORT=4442 \
       -e SE_EVENT_BUS_SUBSCRIBE_PORT=4443 \
-      -v /dev/shm:/dev/shm
+      -v /dev/shm:/dev/shm \
     """
     ArrayList<String> workerIDList = []
     for (int i = 0; i < count; i++) {
